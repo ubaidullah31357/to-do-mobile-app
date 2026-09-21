@@ -1,20 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "./global.css";
+
+import { useState } from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import { SplashScreen } from "./src/components/SplashScreen";
+import { HomeScreen } from "./src/screens/HomeScreen";
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      {showSplash ? (
+        <SplashScreen onFinished={() => setShowSplash(false)} />
+      ) : (
+        <HomeScreen />
+      )}
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

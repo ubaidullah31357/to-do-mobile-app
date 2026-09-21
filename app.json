@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "todo-mobile-temp",
-    "slug": "todo-mobile-temp",
+    "name": "Done - Simple To-do",
+    "slug": "done-todo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
