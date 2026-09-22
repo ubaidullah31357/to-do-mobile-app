@@ -1,6 +1,13 @@
 import "../../global.css";
 import { useState } from "react";
-import { Alert, Pressable, ScrollView, Text, View } from "react-native";
+import {
+  Alert,
+  Platform,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -53,18 +60,28 @@ export function HomeScreen() {
   };
 
   const confirmDelete = (task: Task) => {
-    Alert.alert(
-      "Delete task?",
-      `"${task.title}" will be permanently removed.`,
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: () => deleteTask(task.id),
-        },
-      ],
-    );
+    if (Platform.OS === "web") {
+      if (
+        window.confirm(
+          `"${task.title}" will be permanently removed. Delete Task?`,
+        )
+      ) {
+        deleteTask(task.id);
+      }
+    } else {
+      Alert.alert(
+        "Delete task?",
+        `"${task.title}" will be permanently removed.`,
+        [
+          { text: "Cancel", style: "cancel" },
+          {
+            text: "Delete",
+            style: "destructive",
+            onPress: () => deleteTask(task.id),
+          },
+        ],
+      );
+    }
   };
 
   return (
